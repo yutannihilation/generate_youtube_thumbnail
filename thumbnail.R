@@ -19,7 +19,7 @@ d_pkg <- string2path::string2fill("tidyr", f[1], tolerance = 0.01) |>
 
 d_ver <- string2path::string2fill("1.2.0", f[1], tolerance = 0.01) |>
   dplyr::mutate(
-    x = x * 0.8 + 0.6,
+    x = x * 0.8 + 1.5,
     y = y * 0.8 - 0.4,
     fill = as.integer(triangle_id + 60 * runif(dplyr::n()))
   ) |>
@@ -29,7 +29,7 @@ d_ver <- string2path::string2fill("1.2.0", f[1], tolerance = 0.01) |>
   ) |>
   dplyr::ungroup()
 
-set.seed(120)
+set.seed(15)
 n <- 400
 d <- data.frame(
   x = rnorm(n, 1.7, 1.0),
@@ -52,9 +52,11 @@ d <- data.frame(
 )
 
 p <- ggplot(mapping = aes(x, y)) +
-  geom_text(data = d, aes(label = text, angle = angle), size = 6, colour = alpha("white", 0.4), family = "Iosevka") +
+  geom_text(data = d, aes(label = text, angle = angle), size = 6 * 4, colour = alpha("white", 0.4), family = "Iosevka") +
   geom_polygon(data = d_pkg, aes(group = triangle_id, fill = fill)) +
   geom_polygon(data = d_ver, aes(group = triangle_id, fill = fill)) +
+  annotate("text", x = 0.05, y = -0.65, label = "2022/5/17 22:00~", hjust = 0,
+           family = "Iosevka SS08", fontface = "bold", size = 6.7 * 4, colour = alpha("black", 0.87)) +
   scale_fill_viridis_c(option = "B", guide = "none") +
   coord_equal(
     xlim = c(0,  3),
@@ -63,6 +65,6 @@ p <- ggplot(mapping = aes(x, y)) +
   theme_void() +
   theme(plot.background = element_rect(fill = "grey"))
 
-ggsave("icon.png", p, width = 1280, height = 720, units = "px")
+ggsave("icon.png", p, width = 1280, height = 720, units = "px", scale = 4)
 
 browseURL("icon.png")
