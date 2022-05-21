@@ -9,7 +9,7 @@ d_pkg <- string2path::string2fill("webshot2", f[1], tolerance = 0.01) |>
   dplyr::mutate(
     x = x * 1.0 - 0.1,
     y = y * 1.0 + 0.2,
-    fill = as.integer(10 * x + 3 * y  + 1 * triangle_id + 5 * runif(dplyr::n()))
+    fill = as.integer(100 * x + 30 * y + sqrt(triangle_id) + 50 * runif(dplyr::n()))
   ) |>
   dplyr::group_by(triangle_id) |>
   dplyr::mutate(
@@ -21,7 +21,7 @@ d_ver <- string2path::string2fill("0.1.0", f[1], tolerance = 0.01) |>
   dplyr::mutate(
     x = x * 0.6 + 1.5,
     y = y * 0.6 - 0.2,
-    fill = as.integer(triangle_id + 60 * runif(dplyr::n()))
+    fill = as.integer(100 + 100 * x + 30 * y + sqrt(triangle_id) + 50 * runif(dplyr::n()))
   ) |>
   dplyr::group_by(triangle_id) |>
   dplyr::mutate(
