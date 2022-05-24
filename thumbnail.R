@@ -51,7 +51,7 @@ d <- data.frame(
   angle = runif(n, -20, 60)
 )
 
-p <- ggplot(mapping = aes(x, y)) +
+p1 <- ggplot(mapping = aes(x, y)) +
   geom_text(data = d, aes(label = text, angle = angle), size = 6 * 4, colour = alpha("white", 0.4), family = "Iosevka") +
   geom_polygon(data = d_pkg, aes(group = triangle_id, fill = fill)) +
   geom_polygon(data = d_ver, aes(group = triangle_id, fill = fill)) +
@@ -65,6 +65,24 @@ p <- ggplot(mapping = aes(x, y)) +
   theme_void() +
   theme(plot.background = element_rect(fill = "grey"))
 
-ggsave("icon.png", p, width = 1280, height = 720, units = "px", scale = 4)
+ggsave("icon.png", p1, width = 1280, height = 720, units = "px", scale = 4)
 
 browseURL("icon.png")
+
+p2 <- ggplot(mapping = aes(x, y)) +
+  geom_text(data = d, aes(label = text, angle = angle), size = 6 * 4, colour = alpha("white", 0.4), family = "Iosevka") +
+  geom_polygon(data = d_pkg, aes(group = triangle_id, fill = fill)) +
+  geom_polygon(data = d_ver, aes(group = triangle_id, fill = fill)) +
+  annotate("text", x = 0.05, y = -0.65, label = "もうすぐはじまるよ～", hjust = 0,
+           family = "Noto Sans JP", fontface = "bold", size = 6.7 * 4, colour = alpha("black", 0.87)) +
+  scale_fill_viridis_c(option = "A", guide = "none") +
+  coord_equal(
+    xlim = c(0,  3),
+    ylim = c(-1.3, 1.7) * 9 / 16
+  ) +
+  theme_void() +
+  theme(plot.background = element_rect(fill = "grey"))
+
+ggsave("waiting.png", p2, width = 1280, height = 720, units = "px", scale = 4)
+
+browseURL("waiting.png")
