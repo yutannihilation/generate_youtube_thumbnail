@@ -1,14 +1,23 @@
 library(ggplot2)
 
+theta1 <- pi / 11.3
+theta2 <- pi / 28
+
+pkg_name <- "dbplyr"
+pkg_ver <- "2.2.0"
+start_time <- "2022/6/14 22:00~"
 
 f <- systemfonts::system_fonts() |>
   dplyr::filter(family == "Iosevka", style == "Heavy") |>
   dplyr::pull(path)
 
-d_pkg <- string2path::string2fill("webshot2", f[1], tolerance = 0.01) |>
+d_pkg <- string2path::string2fill(pkg_name, f[1], tolerance = 0.3) |>
   dplyr::mutate(
-    x = x * 1.0 - 0.1,
-    y = y * 1.0 + 0.2,
+    x = x * 1.2 - 0.13,
+    y = y * 1.2 - 0.13,
+    # 回転
+    x = x * cos(theta1) - y * sin(theta1),
+    y = x * sin(theta1) + y * cos(theta1),
     fill = as.integer(100 * x + 30 * y + sqrt(triangle_id) + 50 * runif(dplyr::n()))
   ) |>
   dplyr::group_by(triangle_id) |>
@@ -17,10 +26,13 @@ d_pkg <- string2path::string2fill("webshot2", f[1], tolerance = 0.01) |>
   ) |>
   dplyr::ungroup()
 
-d_ver <- string2path::string2fill("0.1.0", f[1], tolerance = 0.01) |>
+d_ver <- string2path::string2fill(pkg_ver, f[1], tolerance = 0.01) |>
   dplyr::mutate(
-    x = x * 0.6 + 1.5,
-    y = y * 0.6 - 0.2,
+    x = x * 0.8 + 1.4,
+    y = y * 0.8 - 0.4,
+    # 回転
+    x = x * cos(theta2) - y * sin(theta2),
+    y = x * sin(theta2) + y * cos(theta2),
     fill = as.integer(100 + 100 * x + 30 * y + sqrt(triangle_id) + 50 * runif(dplyr::n()))
   ) |>
   dplyr::group_by(triangle_id) |>
@@ -51,37 +63,33 @@ d <- data.frame(
   angle = runif(n, -20, 60)
 )
 
-p1 <- ggplot(mapping = aes(x, y)) +
+p <- ggplot(mapping = aes(x, y)) +
   geom_text(data = d, aes(label = text, angle = angle), size = 6 * 4, colour = alpha("white", 0.4), family = "Iosevka") +
-  geom_polygon(data = d_pkg, aes(group = triangle_id, fill = fill)) +
-  geom_polygon(data = d_ver, aes(group = triangle_id, fill = fill)) +
-  annotate("text", x = 0.05, y = -0.65, label = "2022/5/24 22:00~", hjust = 0,
-           family = "Iosevka SS08", fontface = "bold", size = 6.7 * 4, colour = alpha("black", 0.87)) +
-  scale_fill_viridis_c(option = "A", guide = "none") +
+  geom_polygon(data = d_pkg, aes(group = triangle_id, fill = fill), colour = alpha("white", 0.3), size = 0.45) +
+  geom_polygon(data = d_ver, aes(group = triangle_id, fill = fill), colour = alpha("white", 0.3), size = 0.45) +
+  scale_fill_viridis_c(option = "H", guide = "none", begin = 0.1, end = 0.9) +
+  theme_void() +
+  theme(plot.background = element_rect(fill = "#C5C5C5"))
+
+p1 <- p +
+  annotate("text", x = 0.05, y = -0.55, label = start_time, hjust = 0,
+           family = "Iosevka SS08", fontface = "bold", size = 6.7 * 4, colour = alpha("black", 0.67)) +
   coord_equal(
     xlim = c(0,  3),
     ylim = c(-1.3, 1.7) * 9 / 16
-  ) +
-  theme_void() +
-  theme(plot.background = element_rect(fill = "grey"))
+  )
 
 ggsave("icon.png", p1, width = 1280, height = 720, units = "px", scale = 4)
 
 browseURL("icon.png")
 
-p2 <- ggplot(mapping = aes(x, y)) +
-  geom_text(data = d, aes(label = text, angle = angle), size = 6 * 4, colour = alpha("white", 0.4), family = "Iosevka") +
-  geom_polygon(data = d_pkg, aes(group = triangle_id, fill = fill)) +
-  geom_polygon(data = d_ver, aes(group = triangle_id, fill = fill)) +
-  annotate("text", x = 0.05, y = -0.65, label = "もうすぐはじまるよ～", hjust = 0,
-           family = "Noto Sans JP", fontface = "bold", size = 6.7 * 4, colour = alpha("black", 0.87)) +
-  scale_fill_viridis_c(option = "A", guide = "none") +
+p2 <- p +
+  annotate("text", x = 0.05, y = -0.55, label = "もうすぐはじまるよ～", hjust = 0,
+           family = "Noto Sans JP", fontface = "bold", size = 6.7 * 4, colour = alpha("black", 0.67)) +
   coord_equal(
     xlim = c(0,  3),
     ylim = c(-1.3, 1.7) * 9 / 16
-  ) +
-  theme_void() +
-  theme(plot.background = element_rect(fill = "grey"))
+  )
 
 ggsave("waiting.png", p2, width = 1280, height = 720, units = "px", scale = 4)
 
