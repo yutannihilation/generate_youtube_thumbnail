@@ -67,7 +67,7 @@ p <- ggplot(mapping = aes(x, y)) +
   geom_text(data = d, aes(label = text, angle = angle), size = 6 * 4, colour = alpha("white", 0.4), family = "Iosevka") +
   geom_polygon(data = d_pkg, aes(group = triangle_id, fill = fill), colour = alpha("white", 0.3), size = 0.45) +
   geom_polygon(data = d_ver, aes(group = triangle_id, fill = fill), colour = alpha("white", 0.3), size = 0.45) +
-  scale_fill_viridis_c(option = "H", guide = "none") +
+  scale_fill_viridis_c(option = "H", guide = "none", begin = 0.1, end = 0.9) +
   theme_void() +
   theme(plot.background = element_rect(fill = "#C5C5C5"))
 
