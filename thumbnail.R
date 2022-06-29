@@ -1,13 +1,13 @@
 library(ggplot2)
 
-theta1 <- pi * 1 / 80
-theta2 <- 0
+theta1 <- pi * -2 / 70
+theta2 <- pi * -4 / 60
 
 set.seed(15)
 
-pkg_name <- "rstudio::conf(2022)"
-pkg_ver <- ""
-start_time <- "2022/6/21 22:00~"
+pkg_name <- "RStudio"
+pkg_ver <- "v2022.07"
+start_time <- "2022/7/5 22:00~"
 
 f <- systemfonts::system_fonts() |>
   dplyr::filter(family == "Iosevka", style == "Heavy") |>
@@ -16,13 +16,13 @@ f <- systemfonts::system_fonts() |>
 d_pkg <- string2path::string2fill(pkg_name, f[1], tolerance = 0.3) |>
   dplyr::mutate(
     tibble::tibble(
-      x = x * 0.485 - 0.19 + 0.13 * (y - mean(y)) - 0.013 * glyph_id,
-      y = y * 0.93 - 0.13 + 0.08 * (1.3 * (x - 0.6)) * (0.3 + y)
+      x = x * 1.10 + 0.13 + 0.35 * (y - mean(y)) - 0.03 * (3 - x)^2,
+      y = y * 1.03 + 0.33 + (0.11 * (0.6 - x)) * (0.2 + y)
     ),
     # 回転
     x = x * cos(theta1) - y * sin(theta1),
     y = x * sin(theta1) + y * cos(theta1),
-    fill = as.integer(100 * x + 30 * y + sqrt(triangle_id) + 70 * rnorm(dplyr::n()))
+    fill = as.integer(100 * x + 30 * y + sqrt(triangle_id) + 90 * rnorm(dplyr::n()))
   ) |>
   dplyr::group_by(triangle_id) |>
   dplyr::mutate(
@@ -32,12 +32,12 @@ d_pkg <- string2path::string2fill(pkg_name, f[1], tolerance = 0.3) |>
 
 d_ver <- string2path::string2fill(pkg_ver, f[1], tolerance = 0.01) |>
   dplyr::mutate(
-    x = x * 0.8 + 1.4,
-    y = y * 0.8 - 0.4,
+    x = x * 0.6 + 0.6 + 0.05 * (y - mean(y)),
+    y = y * 0.6 - 0.03 + 0.05 * (x - min(x)),
     # 回転
     x = x * cos(theta2) - y * sin(theta2),
     y = x * sin(theta2) + y * cos(theta2),
-    fill = as.integer(100 + 100 * x + 30 * y + sqrt(triangle_id) + 70 * rnorm(dplyr::n()))
+    fill = as.integer(100 + 100 * x + 30 * y + sqrt(triangle_id) + 90 * rnorm(dplyr::n())) + 50
   ) |>
   dplyr::group_by(triangle_id) |>
   dplyr::mutate(
@@ -69,9 +69,9 @@ d <- data.frame(
 
 p <- ggplot(mapping = aes(x, y)) +
   geom_text(data = d, aes(label = text, angle = angle), size = 6 * 4, colour = alpha("white", 0.4), family = "Iosevka") +
-  geom_polygon(data = d_pkg, aes(group = triangle_id, fill = fill), colour = alpha("white", 0.3), size = 0.45) +
-  geom_polygon(data = d_ver, aes(group = triangle_id, fill = fill), colour = alpha("white", 0.3), size = 0.45) +
-  scale_fill_viridis_c(option = "A", guide = "none", begin = 0.0, end = 0.7, direction = -1) +
+  geom_polygon(data = d_pkg, aes(group = triangle_id, fill = fill), colour = alpha("white", 0.3), linewidth = 0.45) +
+  geom_polygon(data = d_ver, aes(group = triangle_id, fill = fill), colour = alpha("white", 0.3), linewidth = 0.45) +
+  scale_fill_viridis_c(option = "G", guide = "none", direction = -1) +
   theme_void() +
   theme(plot.background = element_rect(fill = "#C5C5C5"))
 
