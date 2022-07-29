@@ -1,19 +1,19 @@
 library(ggplot2)
 
-theta1 <- pi * -3 / 170
+theta1 <- pi * 13 / 170
 theta2 <- pi * 1 / 88
 
 set.seed(15)
 
-pkg_name <- "tidymodels"
-pkg_ver <- "1.0.0"
-start_time <- "2022/7/19 22:00~"
+pkg_name <- "#quartotip"
+pkg_ver <- ""
+start_time <- "2022/8/2 22:00~"
 
 d_pkg <- string2path::string2fill(pkg_name, "Noto Sans JP", font_weight = "black", tolerance = 0.01) |>
   dplyr::mutate(
     tibble::tibble(
-      x = x * 0.80 - 0.05 + 0.15 * (y - mean(y)),
-      y = y * 0.77 + 0.33
+      x = x * 0.88 - 0.05 + 0.08 * (y - mean(y)),
+      y = y * 0.81 - 0.13
     ),
     # 回転
     x = x * cos(theta1) - y * sin(theta1),
@@ -74,7 +74,7 @@ p <- ggplot(mapping = aes(x, y, group = triangle_id)) +
   geom_path(data = d_ver, colour = alpha("white", 0.3), linewidth = 0.75) +
   geom_point(data = d_pkg, colour = alpha("white", 0.3), size = 2.4) +
   geom_point(data = d_ver, colour = alpha("white", 0.3), size = 2.4) +
-  scale_fill_viridis_c(option = "C", guide = "none", end = 0.9, direction = -1) +
+  scale_fill_viridis_c(option = "G", guide = "none", end = 0.95, direction = 1) +
   theme_void() +
   theme(plot.background = element_rect(fill = "#C5C5C5"))
 
