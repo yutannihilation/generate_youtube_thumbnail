@@ -1,19 +1,21 @@
 library(ggplot2)
 
-theta1 <- pi * 13 / 170
-theta2 <- pi * 1 / 88
+scale <- scale_fill_viridis_c(option = "F", guide = "none", end = 0.95, direction = -1)
+
+theta1 <- pi * -22 / 360
+theta2 <- pi * -27 / 360
 
 set.seed(15)
 
-pkg_name <- "#quartotip"
-pkg_ver <- ""
-start_time <- "2022/8/2 22:00~"
+pkg_name <- "ggplot2"
+pkg_ver <- "3.4.0 (予定)"
+start_time <- "2022/8/9 22:00~"
 
 d_pkg <- string2path::string2fill(pkg_name, "Noto Sans JP", font_weight = "black", tolerance = 0.01) |>
   dplyr::mutate(
     tibble::tibble(
-      x = x * 0.88 - 0.05 + 0.08 * (y - mean(y)),
-      y = y * 0.81 - 0.13
+      x = x * 0.88 + 0.12 + 0.08 * (y - mean(y)),
+      y = y * 0.83 + 0.52
     ),
     # 回転
     x = x * cos(theta1) - y * sin(theta1),
@@ -28,8 +30,8 @@ d_pkg <- string2path::string2fill(pkg_name, "Noto Sans JP", font_weight = "black
 
 d_ver <- string2path::string2fill(pkg_ver, "Noto Sans JP", font_weight = "black", tolerance = 0.01) |>
   dplyr::mutate(
-    x = x * 0.7 + 1.1 + 0.05 * (y - mean(y)),
-    y = y * 0.7 - 0.33,
+    x = x * (0.6 - 0.29 * (glyph_id >= 6)) + 1.1 + 0.05 * (y - mean(y)) + 0.43 * (glyph_id >= 6),
+    y = y * (0.6 - 0.29 * (glyph_id >= 6)) + 0.12,
     # 回転
     x = x * cos(theta2) - y * sin(theta2),
     y = x * sin(theta2) + y * cos(theta2),
@@ -74,7 +76,7 @@ p <- ggplot(mapping = aes(x, y, group = triangle_id)) +
   geom_path(data = d_ver, colour = alpha("white", 0.3), linewidth = 0.75) +
   geom_point(data = d_pkg, colour = alpha("white", 0.3), size = 2.4) +
   geom_point(data = d_ver, colour = alpha("white", 0.3), size = 2.4) +
-  scale_fill_viridis_c(option = "G", guide = "none", end = 0.95, direction = 1) +
+  scale +
   theme_void() +
   theme(plot.background = element_rect(fill = "#C5C5C5"))
 
