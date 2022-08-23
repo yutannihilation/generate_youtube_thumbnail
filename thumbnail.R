@@ -1,8 +1,11 @@
 library(ggplot2)
 
-scale <- colorspace::scale_fill_continuous_sequential(palette = "Reds 3", guide = "none", begin = 1, end = 0.2)
+scale <- colorspace::scale_fill_continuous_sequential(
+  c1 = 60, c2 = 0, l1 = 25, l2 = 95, h1 = 204, h2 = 83, p1 = 0.7, p2 = 1.3,
+  guide = "none"
+)
 
-shadow_colour <- colorspace::darken(alpha("#00dd79", 0.3), 0.3)
+shadow_colour <- colorspace::darken(alpha("#3379dd", 0.7), 0.7)
 
 theta1 <- pi * 13.1 / 360
 theta2 <- pi * -1.7 / 360
@@ -11,7 +14,7 @@ set.seed(15)
 
 pkg_name <- "dplyr & \ntidyselect"
 pkg_ver <- "現状確認"
-start_time <- "2022/8/23 22:00~"
+start_time <- "2022/8/30 22:00~"
 
 d_pkg <- string2path::string2fill(pkg_name, "Noto Sans JP", font_weight = "black", tolerance = 0.01) |>
   dplyr::mutate(
