@@ -105,3 +105,13 @@ p2 <- p +
 ggsave("waiting.png", p2, width = 1280, height = 720, units = "px", scale = 4)
 
 browseURL("waiting.png")
+
+p3 <- p +
+  annotate("text", x = 0.05, y = -0.55, label = "ありがとうございました！", hjust = 0,
+           family = "Noto Sans JP", fontface = "bold", size = 6.7 * 4, colour = alpha("black", 0.67)) +
+  coord_equal(
+    xlim = c(0,  3),
+    ylim = c(-1.3, 1.7) * 9 / 16
+  )
+
+ggsave("goodbye.png", p3, width = 1280, height = 720, units = "px", scale = 4)
