@@ -1,22 +1,23 @@
 library(ggplot2)
 
-scale <- scale_fill_viridis_c(option = "A", guide = "none", end = 0.95, direction = 1)
-scale <- colorspace::scale_fill_continuous_sequential(palette = "Greens ", guide = "none")
+scale <- colorspace::scale_fill_continuous_sequential(palette = "Reds 3", guide = "none", begin = 1, end = 0.2)
 
-theta1 <- pi * 8.1 / 360
+shadow_colour <- colorspace::darken(alpha("#00dd79", 0.3), 0.3)
+
+theta1 <- pi * 13.1 / 360
 theta2 <- pi * -1.7 / 360
 
 set.seed(15)
 
-pkg_name <- "terra"
-pkg_ver <- "1.6-7"
-start_time <- "2022/8/16 22:00~"
+pkg_name <- "dplyr & \ntidyselect"
+pkg_ver <- "現状確認"
+start_time <- "2022/8/23 22:00~"
 
 d_pkg <- string2path::string2fill(pkg_name, "Noto Sans JP", font_weight = "black", tolerance = 0.01) |>
   dplyr::mutate(
     tibble::tibble(
-      x = x * 1.2 + 0.12 + 0.08 * (y - mean(y)),
-      y = y * 1.33 + 0.28
+      x = x * 0.62 + 0.12 + 0.08 * (y - mean(y)),
+      y = y * 0.633 + 0.48
     ),
     # 回転
     x = x * cos(theta1) - y * sin(theta1),
@@ -31,8 +32,8 @@ d_pkg <- string2path::string2fill(pkg_name, "Noto Sans JP", font_weight = "black
 
 d_ver <- string2path::string2fill(pkg_ver, "Noto Sans JP", font_weight = "black", tolerance = 0.01) |>
   dplyr::mutate(
-    x = x * 0.87 + 1.4 + 0.05 * (y - mean(y)),
-    y = y * 0.92 - 0.3,
+    x = x * 0.55 + 1.4 + 0.05 * (y - mean(y)),
+    y = y * 0.52 - 0.4,
     # 回転
     x = x * cos(theta2) - y * sin(theta2),
     y = x * sin(theta2) + y * cos(theta2),
@@ -69,8 +70,8 @@ d <- data.frame(
 p <- ggplot(mapping = aes(x, y, group = triangle_id)) +
   geom_text(data = d, aes(label = text, angle = angle, group = NULL),
             size = 6 * 4, colour = alpha("white", 0.4), family = "Iosevka") +
-  geom_polygon(data = d_pkg, aes(x + 0.05, y - 0.03), fill = alpha("#dd0079", 0.3), colour = "transparent") +
-  geom_polygon(data = d_ver, aes(x + 0.07, y - 0.04), fill = alpha("#dd0079", 0.3), colour = "transparent") +
+  geom_polygon(data = d_pkg, aes(x + 0.05, y - 0.03), fill = shadow_colour, colour = "transparent") +
+  geom_polygon(data = d_ver, aes(x + 0.07, y - 0.04), fill = shadow_colour, colour = "transparent") +
   geom_polygon(data = d_pkg, aes(fill = fill), colour = "transparent") +
   geom_polygon(data = d_ver, aes(fill = fill), colour = "transparent") +
   geom_path(data = d_pkg, colour = alpha("white", 0.3), linewidth = 0.75) +
