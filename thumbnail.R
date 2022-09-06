@@ -5,22 +5,22 @@ scale <- colorspace::scale_fill_continuous_sequential(
   guide = "none"
 )
 
-shadow_colour <- colorspace::darken(alpha("#3379dd", 0.7), 0.7)
+shadow_colour <- colorspace::darken(alpha("#dd4211", 0.2), 0.4)
 
 theta1 <- pi * 13.1 / 360
 theta2 <- pi * -1.7 / 360
 
 set.seed(15)
 
-pkg_name <- "dplyr & \ntidyselect"
-pkg_ver <- "現状確認"
-start_time <- "2022/8/30 22:00~"
+pkg_name <- "duckdb"
+pkg_ver <- "0.5.0"
+start_time <- "2022/9/6 22:00~"
 
 d_pkg <- string2path::string2fill(pkg_name, "Noto Sans JP", font_weight = "black", tolerance = 0.01) |>
   dplyr::mutate(
     tibble::tibble(
-      x = x * 0.62 + 0.12 + 0.08 * (y - mean(y)),
-      y = y * 0.633 + 0.48
+      x = x * 1.1 + 0.22 + 0.08 * (y - mean(y)),
+      y = y * 1.03 + 0.22
     ),
     # 回転
     x = x * cos(theta1) - y * sin(theta1),
@@ -35,8 +35,8 @@ d_pkg <- string2path::string2fill(pkg_name, "Noto Sans JP", font_weight = "black
 
 d_ver <- string2path::string2fill(pkg_ver, "Noto Sans JP", font_weight = "black", tolerance = 0.01) |>
   dplyr::mutate(
-    x = x * 0.55 + 1.4 + 0.05 * (y - mean(y)),
-    y = y * 0.52 - 0.4,
+    x = x * 0.75 + 1.2 + 0.05 * (y - mean(y)),
+    y = y * 0.72 - 0.13,
     # 回転
     x = x * cos(theta2) - y * sin(theta2),
     y = x * sin(theta2) + y * cos(theta2),
