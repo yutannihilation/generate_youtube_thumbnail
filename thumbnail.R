@@ -1,7 +1,7 @@
 library(ggplot2)
 
 scale <- colorspace::scale_fill_continuous_sequential(
-  c1 = 100, c2 = 44, l1 = 43, l2 = 95, h1 = -4, h2 = 80, p1 = 2.0, p2 = NA,
+  h1 = 250, h2 = 90, c1 = 40, c2 = 55, l1 = 33, l2 = 105, p1 = 0.5, p2 = 1.3,
   guide = "none"
 )
 
@@ -12,15 +12,15 @@ theta2 <- pi * 15.0 / 360
 
 set.seed(15)
 
-pkg_name <- "r-lib"
-pkg_ver <- "/ actions"
-start_time <- "2022/9/13 22:00~"
+pkg_name <- "purrr"
+pkg_ver <- "1.0.0 (?)"
+start_time <- "2022/9/20 22:00~"
 
 d_pkg <- string2path::string2fill(pkg_name, "Noto Sans JP", font_weight = "black", tolerance = 0.01) |>
   dplyr::mutate(
     tibble::tibble(
-      x = x * 0.9 + 0.22 + 0.08 * (y - mean(y)),
-      y = y * 0.8 + 0.22 - 0.03
+      x = x * 1.05 + 0.22 + 0.08 * (y - mean(y)),
+      y = y * 1.0  + 0.22 + 0.03
     ),
     # 回転
     x = x * cos(theta1) - y * sin(theta1),
@@ -36,7 +36,7 @@ d_pkg <- string2path::string2fill(pkg_name, "Noto Sans JP", font_weight = "black
 d_ver <- string2path::string2fill(pkg_ver, "Noto Sans JP", font_weight = "black", tolerance = 0.01) |>
   dplyr::mutate(
     x = x * 0.75 + 0.7 + 0.05 * (y - mean(y)),
-    y = y * 0.72 - 0.25,
+    y = y * 0.72 - 0.35,
     # 回転
     x = x * cos(theta2) - y * sin(theta2),
     y = x * sin(theta2) + y * cos(theta2),
@@ -73,8 +73,8 @@ d <- data.frame(
 p <- ggplot(mapping = aes(x, y, group = triangle_id)) +
   geom_text(data = d, aes(label = text, angle = angle, group = NULL),
             size = 6 * 4, colour = alpha("white", 0.4), family = "Iosevka") +
-  geom_polygon(data = d_pkg, aes(x + 0.05, y - 0.03), fill = shadow_colour, colour = "transparent") +
-  geom_polygon(data = d_ver, aes(x + 0.07, y - 0.04), fill = shadow_colour, colour = "transparent") +
+  geom_polygon(data = d_pkg, aes(x + 0.05,  y - 0.03), fill = shadow_colour, colour = "transparent") +
+  geom_polygon(data = d_ver, aes(x + 0.045, y - 0.02), fill = shadow_colour, colour = "transparent") +
   geom_polygon(data = d_pkg, aes(fill = fill), colour = "transparent") +
   geom_polygon(data = d_ver, aes(fill = fill), colour = "transparent") +
   geom_path(data = d_pkg, colour = alpha("white", 0.3), linewidth = 0.75) +
