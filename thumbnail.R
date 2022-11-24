@@ -1,7 +1,7 @@
 library(ggplot2)
 
 scale <- colorspace::scale_fill_continuous_sequential(
-  h1 = 250, h2 = 90, c1 = 40, c2 = 55, l1 = 33, l2 = 105, p1 = 0.5, p2 = 1.3,
+  h1 = -18, h2 = NA, c1 = 58, c2 = NA, l1 = 97, l2 = 30, p1 = 1.1, p2 = 1.6,
   guide = "none"
 )
 
@@ -12,15 +12,15 @@ theta2 <- pi * 15.0 / 360
 
 set.seed(15)
 
-pkg_name <- "purrr"
-pkg_ver <- "1.0.0 (?)"
-start_time <- "2022/9/20 22:00~"
+pkg_name <- "Quarto"
+pkg_ver <- "v1.2"
+start_time <- "2022/11/29 22:00~"
 
 d_pkg <- string2path::string2fill(pkg_name, "Noto Sans JP", font_weight = "black", tolerance = 0.01) |>
   dplyr::mutate(
     tibble::tibble(
-      x = x * 1.05 + 0.22 + 0.08 * (y - mean(y)),
-      y = y * 1.0  + 0.22 + 0.03
+      x = x * 0.9 + 0.22 + 0.08 * (y - mean(y)),
+      y = y * 0.9 + 0.22
     ),
     # 回転
     x = x * cos(theta1) - y * sin(theta1),
@@ -35,8 +35,8 @@ d_pkg <- string2path::string2fill(pkg_name, "Noto Sans JP", font_weight = "black
 
 d_ver <- string2path::string2fill(pkg_ver, "Noto Sans JP", font_weight = "black", tolerance = 0.01) |>
   dplyr::mutate(
-    x = x * 0.75 + 0.7 + 0.05 * (y - mean(y)),
-    y = y * 0.72 - 0.35,
+    x = x * 0.6 + 0.9,
+    y = y * 0.6 - 0.35,
     # 回転
     x = x * cos(theta2) - y * sin(theta2),
     y = x * sin(theta2) + y * cos(theta2),
@@ -83,7 +83,7 @@ p <- ggplot(mapping = aes(x, y, group = triangle_id)) +
   geom_point(data = d_ver, colour = alpha("white", 0.3), size = 2.4) +
   scale +
   theme_void() +
-  theme(plot.background = element_rect(fill = "#C5C5C5"))
+  theme(plot.background = element_rect(fill = "#DDDDDD"))
 
 p1 <- p +
   annotate("text", x = 0.05, y = -0.55, label = start_time, hjust = 0,
