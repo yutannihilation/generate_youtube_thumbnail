@@ -1,7 +1,7 @@
 library(ggplot2)
 
 scale <- colorspace::scale_fill_continuous_sequential(
-  h1 = -18, h2 = NA, c1 = 58, c2 = NA, l1 = 97, l2 = 30, p1 = 1.1, p2 = 1.6,
+  h1 = 154, h2 = NA, c1 = 35, c2 = NA, l1 = 98, l2 = 25, p1 = 1.0, p2 = 1.6,
   guide = "none"
 )
 
@@ -12,15 +12,15 @@ theta2 <- pi * 15.0 / 360
 
 set.seed(15)
 
-pkg_name <- "Quarto"
-pkg_ver <- "v1.2"
-start_time <- "2022/11/29 22:00~"
+pkg_name <- "slider"
+pkg_ver <- "0.3.0"
+start_time <- "2022/12/6 22:00~"
 
 d_pkg <- string2path::string2fill(pkg_name, "Noto Sans JP", font_weight = "black", tolerance = 0.01) |>
   dplyr::mutate(
     tibble::tibble(
-      x = x * 0.9 + 0.22 + 0.08 * (y - mean(y)),
-      y = y * 0.9 + 0.22
+      x = x * 1.01 + 0.52,
+      y = y * 1.01 + 0.1
     ),
     # 回転
     x = x * cos(theta1) - y * sin(theta1),
@@ -35,8 +35,8 @@ d_pkg <- string2path::string2fill(pkg_name, "Noto Sans JP", font_weight = "black
 
 d_ver <- string2path::string2fill(pkg_ver, "Noto Sans JP", font_weight = "black", tolerance = 0.01) |>
   dplyr::mutate(
-    x = x * 0.6 + 0.9,
-    y = y * 0.6 - 0.35,
+    x = x * 0.6 + 1.11,
+    y = y * 0.6 - 0.41,
     # 回転
     x = x * cos(theta2) - y * sin(theta2),
     y = x * sin(theta2) + y * cos(theta2),
