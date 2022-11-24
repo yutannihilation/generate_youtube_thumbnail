@@ -1,7 +1,7 @@
 library(ggplot2)
 
 scale <- colorspace::scale_fill_continuous_sequential(
-  h1 = 154, h2 = NA, c1 = 35, c2 = NA, l1 = 98, l2 = 25, p1 = 1.0, p2 = 1.6,
+  h1 = 247, h2 = NA, c1 = 43, c2 = 0, l1 = 99, l2 = 1, p1 = 1.0, p2 = NA,
   guide = "none"
 )
 
@@ -12,15 +12,15 @@ theta2 <- pi * 15.0 / 360
 
 set.seed(15)
 
-pkg_name <- "slider"
-pkg_ver <- "0.3.0"
-start_time <- "2022/12/6 22:00~"
+pkg_name <- "codegrip"
+pkg_ver <- ""
+start_time <- "2022/12/13 22:00~"
 
 d_pkg <- string2path::string2fill(pkg_name, "Noto Sans JP", font_weight = "black", tolerance = 0.01) |>
   dplyr::mutate(
     tibble::tibble(
-      x = x * 1.01 + 0.52,
-      y = y * 1.01 + 0.1
+      x = x * 0.95 + 0.22,
+      y = y * 0.95 - 0.17
     ),
     # 回転
     x = x * cos(theta1) - y * sin(theta1),
