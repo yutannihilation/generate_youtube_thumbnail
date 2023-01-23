@@ -1,8 +1,8 @@
 library(ggplot2)
 
 scale <- colorspace::scale_fill_continuous_sequential(
-  h1 = 198, h2 = NA, c1 = 86, c2 = NA, l1 = 28, l2 = 98, p1 = 1.2, p2 = 2.2,
-  guide = "none", rev = FALSE,
+  h1 = 245, h2 = 328, c1 = 196, c2 = NA, l1 = 55, l2 = 115, p1 = 1.0, p2 = NA,
+  guide = "none", rev = FALSE
 )
 
 shadow_colour <- colorspace::darken(alpha("#dd4211", 0.2), 0.4)
@@ -12,20 +12,20 @@ theta2 <- pi * 15.0 / 360
 
 set.seed(15)
 
-pkg_name <- "stringr"
-pkg_ver <- "1.5.0"
-start_time <- "2023/01/10 22:00~"
+pkg_name <- "tidyr"
+pkg_ver <- "1.3.0"
+start_time <- "2023/01/17 22:00~"
 
 d_pkg <- string2path::string2fill(pkg_name, "Noto Sans JP", font_weight = "black", tolerance = 0.01) |>
   dplyr::mutate(
     tibble::tibble(
-      x = x * 0.95 + 0.22,
+      x = x * 0.95 + 0.32,
       y = y * 0.95 + 0.17
     ),
     # 回転
     x = x * cos(theta1) - y * sin(theta1),
     y = x * sin(theta1) + y * cos(theta1),
-    fill = as.integer(100 * x + 30 * y + sqrt(triangle_id) + 50 * rnorm(dplyr::n()))
+    fill = abs((16 * x)^1.7 + 30 * y + sqrt(triangle_id) + 50 * rnorm(dplyr::n()))^1.5
   ) |>
   dplyr::group_by(triangle_id) |>
   dplyr::mutate(
@@ -35,12 +35,12 @@ d_pkg <- string2path::string2fill(pkg_name, "Noto Sans JP", font_weight = "black
 
 d_ver <- string2path::string2fill(pkg_ver, "Noto Sans JP", font_weight = "black", tolerance = 0.01) |>
   dplyr::mutate(
-    x = x * 0.6 + 1.11,
-    y = y * 0.6 - 0.41,
+    x = x * 0.6 + 1.41,
+    y = y * 0.6 - 0.31,
     # 回転
     x = x * cos(theta2) - y * sin(theta2),
     y = x * sin(theta2) + y * cos(theta2),
-    fill = as.integer(70 + 100 * x + 30 * y + sqrt(triangle_id) + 50 * rnorm(dplyr::n()))
+    fill = abs(70 + (16 * x)^1.7 + 30 * y + sqrt(triangle_id) + 50 * rnorm(dplyr::n()))^1.5
   ) |>
   dplyr::group_by(triangle_id) |>
   dplyr::mutate(
