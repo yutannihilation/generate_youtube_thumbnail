@@ -1,7 +1,7 @@
 library(ggplot2)
 
 scale <- colorspace::scale_fill_continuous_sequential(
-  h1 = 245, h2 = 328, c1 = 196, c2 = NA, l1 = 55, l2 = 115, p1 = 1.0, p2 = NA,
+  h1 = -134, h2 = 60, c1 = 0, c2 = 10, cmax = 97, l1 = 2, l2 = 97, p1 = 0.8, p2 = 0.8,
   guide = "none", rev = FALSE
 )
 
@@ -12,20 +12,20 @@ theta2 <- pi * 15.0 / 360
 
 set.seed(15)
 
-pkg_name <- "tidyr"
-pkg_ver <- "1.3.0"
-start_time <- "2023/01/17 22:00~"
+pkg_name <- "lubridate"
+pkg_ver <- "1.9.0"
+start_time <- "2023/01/24 22:00~"
 
 d_pkg <- string2path::string2fill(pkg_name, "Noto Sans JP", font_weight = "black", tolerance = 0.01) |>
   dplyr::mutate(
     tibble::tibble(
-      x = x * 0.95 + 0.32,
-      y = y * 0.95 + 0.17
+      x = x * 0.95 - 0.05,
+      y = y * 0.95 + 0.03
     ),
     # 回転
     x = x * cos(theta1) - y * sin(theta1),
     y = x * sin(theta1) + y * cos(theta1),
-    fill = abs((16 * x)^1.7 + 30 * y + sqrt(triangle_id) + 50 * rnorm(dplyr::n()))^1.5
+    fill = abs((60 * (x + 1))^1.2 + 30 * y + sqrt(triangle_id) + 50 * rnorm(dplyr::n()))^1.5
   ) |>
   dplyr::group_by(triangle_id) |>
   dplyr::mutate(
@@ -36,11 +36,11 @@ d_pkg <- string2path::string2fill(pkg_name, "Noto Sans JP", font_weight = "black
 d_ver <- string2path::string2fill(pkg_ver, "Noto Sans JP", font_weight = "black", tolerance = 0.01) |>
   dplyr::mutate(
     x = x * 0.6 + 1.41,
-    y = y * 0.6 - 0.31,
+    y = y * 0.6 - 0.5,
     # 回転
     x = x * cos(theta2) - y * sin(theta2),
     y = x * sin(theta2) + y * cos(theta2),
-    fill = abs(70 + (16 * x)^1.7 + 30 * y + sqrt(triangle_id) + 50 * rnorm(dplyr::n()))^1.5
+    fill = abs(70 + (60 * (x + 1))^1.2 + 30 * y + sqrt(triangle_id) + 50 * rnorm(dplyr::n()))^1.5
   ) |>
   dplyr::group_by(triangle_id) |>
   dplyr::mutate(
