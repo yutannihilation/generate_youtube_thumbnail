@@ -1,7 +1,7 @@
 library(ggplot2)
 
 scale <- colorspace::scale_fill_continuous_sequential(
-  h1 = -134, h2 = 60, c1 = 0, c2 = 10, cmax = 97, l1 = 2, l2 = 97, p1 = 0.8, p2 = 0.8,
+  h1 = 225, h2 = 300, c1 = 55, c2 = 20, cmax = 60, l1 = 42, l2 = 92, p1 = 0.6, p2 = 1.0,
   guide = "none", rev = FALSE
 )
 
@@ -12,9 +12,9 @@ theta2 <- pi * 15.0 / 360
 
 set.seed(15)
 
-pkg_name <- "lubridate"
-pkg_ver <- "1.9.0"
-start_time <- "2023/01/24 22:00~"
+pkg_name <- "glyphInfo"
+pkg_ver <- "(R 4.3)"
+start_time <- "2023/01/31 22:00~"
 
 d_pkg <- string2path::string2fill(pkg_name, "Noto Sans JP", font_weight = "black", tolerance = 0.01) |>
   dplyr::mutate(
