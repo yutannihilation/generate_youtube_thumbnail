@@ -1,8 +1,8 @@
 library(ggplot2)
 
 scale <- colorspace::scale_fill_continuous_sequential(
-  h1 = 225, h2 = 300, c1 = 55, c2 = 20, cmax = 60, l1 = 42, l2 = 92, p1 = 0.6, p2 = 1.0,
-  guide = "none", rev = FALSE
+  h1 = -80, h2 = 78, c1 = 60, c2 = 55, cmax = 75, l1 = 40, l2 = 91, p1 = 0.8, p2 = 1.0,
+  guide = "none"
 )
 
 shadow_colour <- colorspace::darken(alpha("#dd4211", 0.2), 0.4)
@@ -12,15 +12,15 @@ theta2 <- pi * 15.0 / 360
 
 set.seed(15)
 
-pkg_name <- "glyphInfo"
-pkg_ver <- "(R 4.3)"
-start_time <- "2023/01/31 22:00~"
+pkg_name <- "R"
+pkg_ver <- "4.3"
+start_time <- "2023/04/18 22:00~"
 
 d_pkg <- string2path::string2fill(pkg_name, "Noto Sans JP", font_weight = "black", tolerance = 0.01) |>
   dplyr::mutate(
     tibble::tibble(
-      x = x * 0.95 - 0.05,
-      y = y * 0.95 + 0.03
+      x = x * 1.65 + 0.35,
+      y = y * 1.65 - 0.23
     ),
     # 回転
     x = x * cos(theta1) - y * sin(theta1),
@@ -35,8 +35,8 @@ d_pkg <- string2path::string2fill(pkg_name, "Noto Sans JP", font_weight = "black
 
 d_ver <- string2path::string2fill(pkg_ver, "Noto Sans JP", font_weight = "black", tolerance = 0.01) |>
   dplyr::mutate(
-    x = x * 0.6 + 1.41,
-    y = y * 0.6 - 0.5,
+    x = x * 1.3 + 1.21,
+    y = y * 1.3 - 0.5,
     # 回転
     x = x * cos(theta2) - y * sin(theta2),
     y = x * sin(theta2) + y * cos(theta2),
