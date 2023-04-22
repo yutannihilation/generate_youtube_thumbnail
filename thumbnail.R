@@ -14,7 +14,7 @@ set.seed(15)
 
 pkg_name <- "R"
 pkg_ver <- "4.3"
-start_time <- "2023/04/18 22:00~"
+start_time <- "2023/04/25 22:00~"
 
 d_pkg <- string2path::string2fill(pkg_name, "Noto Sans JP", font_weight = "black", tolerance = 0.01) |>
   dplyr::mutate(
