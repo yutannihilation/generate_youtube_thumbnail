@@ -1,26 +1,26 @@
 library(ggplot2)
 
 scale <- colorspace::scale_fill_continuous_sequential(
-  h1 = 270, h2 = 90, c1 = 40, c2 = 25, cmax = 90, l1 = 15, l2 = 99, p1 = 2.0, p2 = 1.5,
-  guide = "none", rev = TRUE
+  h1 = 360, h2 = 208, c1 = 157, c2 = NA, cmax = 80, l1 = 30, l2 = 70, p1 = 0.7, p2 = 1.5,
+  guide = "none", rev = FALSE
 )
 
 shadow_colour <- colorspace::darken(alpha("#dd4211", 0.2), 0.4)
 
-theta1 <- pi * 10.1 / 360
-theta2 <- pi * 45.0 / 360
+theta1 <- pi * 15.1 / 360
+theta2 <- pi * 19.0 / 360
 
 set.seed(15)
 
-pkg_name <- "rgdal, rgeos,\nmaptools"
-pkg_ver <- "引退問題"
-start_time <- "2023/06/06 22:00~"
+pkg_name <- "posit::conf(2023)"
+pkg_ver <- "発表タイトル確認"
+start_time <- "2023/06/13 22:00~"
 
 d_pkg <- string2path::string2fill(pkg_name, "Noto Sans JP", font_weight = "black", tolerance = 0.01) |>
   dplyr::mutate(
     tibble::tibble(
-      x = x * 0.7 - 0.1,
-      y = y * 0.7 + 0.55
+      x = x * 0.56 - 0.14,
+      y = y * 0.56 + 0.2
     ),
     # 回転
     x = x * cos(theta1) - y * sin(theta1),
@@ -35,8 +35,8 @@ d_pkg <- string2path::string2fill(pkg_name, "Noto Sans JP", font_weight = "black
 
 d_ver <- string2path::string2fill(pkg_ver, "Noto Sans JP", font_weight = "black", tolerance = 0.01) |>
   dplyr::mutate(
-    x = x * 0.7 + 0.94,
-    y = y * 0.7 - 1.40,
+    x = x * 0.49 + 0.13,
+    y = y * 0.49 - 0.40,
     # 回転
     x = x * cos(theta2) - y * sin(theta2),
     y = x * sin(theta2) + y * cos(theta2),
