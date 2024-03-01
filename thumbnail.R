@@ -1,26 +1,26 @@
 library(ggplot2)
 
 scale <- colorspace::scale_fill_continuous_sequential(
-  h1 = 360, h2 = 208, c1 = 157, c2 = NA, cmax = 80, l1 = 30, l2 = 70, p1 = 0.7, p2 = 1.5,
+  h1 = 13, h2 = 30, c1 = 65, c2 = 30, cmax = 150, l1 = 20, l2 = 97, p1 = 0.8, p2 = 1.5,
   guide = "none", rev = FALSE
 )
 
-shadow_colour <- colorspace::darken(alpha("#dd4211", 0.2), 0.4)
+shadow_colour <- colorspace::darken(alpha("#4211dd", 0.2), 0.4)
 
 theta1 <- pi * 15.1 / 360
 theta2 <- pi * 19.0 / 360
 
 set.seed(15)
 
-pkg_name <- "posit::conf(2023)"
-pkg_ver <- "発表タイトル確認"
-start_time <- "2023/06/13 22:00~"
+pkg_name <- "ggplot2"
+pkg_ver <- "3.5.0"
+start_time <- "2024/02/27 22:00~"
 
 d_pkg <- string2path::string2fill(pkg_name, "Noto Sans JP", font_weight = "black", tolerance = 0.01) |>
   dplyr::mutate(
     tibble::tibble(
-      x = x * 0.56 - 0.14,
-      y = y * 0.56 + 0.2
+      x = x * 1. + 0.1,
+      y = y * 1. + 0.2
     ),
     # 回転
     x = x * cos(theta1) - y * sin(theta1),
@@ -35,8 +35,8 @@ d_pkg <- string2path::string2fill(pkg_name, "Noto Sans JP", font_weight = "black
 
 d_ver <- string2path::string2fill(pkg_ver, "Noto Sans JP", font_weight = "black", tolerance = 0.01) |>
   dplyr::mutate(
-    x = x * 0.49 + 0.13,
-    y = y * 0.49 - 0.40,
+    x = x * 0.92 + 0.93,
+    y = y * 0.92 - 0.50,
     # 回転
     x = x * cos(theta2) - y * sin(theta2),
     y = x * sin(theta2) + y * cos(theta2),
