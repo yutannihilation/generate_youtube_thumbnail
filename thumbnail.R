@@ -1,7 +1,7 @@
 library(ggplot2)
 
 scale <- colorspace::scale_fill_continuous_sequential(
-  h1 = 302, h2 = 130, c1 = 35, c2 = 80, cmax = 150, l1 = 20, l2 = 97, p1 = 1.1, p2 = 1.5,
+  h1 = 40, h2 = -127, c1 = 96, c2 = 23, cmax = 150, l1 = 23, l2 = 97, p1 = 1.1, p2 = 1.5,
   guide = "none", rev = FALSE
 )
 
@@ -12,15 +12,15 @@ theta2 <- pi * 19.0 / 360
 
 set.seed(15)
 
-pkg_name <- "UseR!"
-pkg_ver <- "2024"
-start_time <- "2024/07/14 22:00~"
+pkg_name <- "patchwork"
+pkg_ver <- "1.3.0"
+start_time <- "2024/09/17 22:00~"
 
 d_pkg <- string2path::string2fill(pkg_name, "Noto Sans JP", font_weight = "black", tolerance = 0.01) |>
   dplyr::mutate(
     tibble::tibble(
-      x = x * 1. + 0.1,
-      y = y * 1. + 0.2
+      x = x * 0.82 + 0.05,
+      y = y * 0.82 + 0.05
     ),
     # 回転
     x = x * cos(theta1) - y * sin(theta1),
@@ -35,8 +35,8 @@ d_pkg <- string2path::string2fill(pkg_name, "Noto Sans JP", font_weight = "black
 
 d_ver <- string2path::string2fill(pkg_ver, "Noto Sans JP", font_weight = "black", tolerance = 0.01) |>
   dplyr::mutate(
-    x = x * 0.92 + 0.93,
-    y = y * 0.92 - 0.50,
+    x = x * 0.72 + 0.93,
+    y = y * 0.72 - 0.50,
     # 回転
     x = x * cos(theta2) - y * sin(theta2),
     y = x * sin(theta2) + y * cos(theta2),
@@ -95,8 +95,6 @@ p1 <- p +
 
 ggsave("icon.png", p1, width = 1280, height = 720, units = "px", scale = 4)
 
-browseURL("icon.png")
-
 p2 <- p +
   annotate("text", x = 0.05, y = -0.55, label = "もうすぐはじまるよ～", hjust = 0,
            family = "Noto Sans JP", fontface = "bold", size = 6.7 * 4, colour = alpha("black", 0.67)) +
@@ -106,8 +104,6 @@ p2 <- p +
   )
 
 ggsave("waiting.png", p2, width = 1280, height = 720, units = "px", scale = 4)
-
-browseURL("waiting.png")
 
 p3 <- p +
   annotate("text", x = 0.05, y = -0.55, label = "ありがとうございました！", hjust = 0,
