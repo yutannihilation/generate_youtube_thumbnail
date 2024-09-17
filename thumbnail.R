@@ -1,7 +1,7 @@
 library(ggplot2)
 
 scale <- colorspace::scale_fill_continuous_sequential(
-  h1 = 13, h2 = 30, c1 = 65, c2 = 30, cmax = 150, l1 = 20, l2 = 97, p1 = 0.8, p2 = 1.5,
+  h1 = 302, h2 = 130, c1 = 35, c2 = 80, cmax = 150, l1 = 20, l2 = 97, p1 = 1.1, p2 = 1.5,
   guide = "none", rev = FALSE
 )
 
@@ -12,9 +12,9 @@ theta2 <- pi * 19.0 / 360
 
 set.seed(15)
 
-pkg_name <- "ggplot2"
-pkg_ver <- "3.5.0"
-start_time <- "2024/02/27 22:00~"
+pkg_name <- "UseR!"
+pkg_ver <- "2024"
+start_time <- "2024/07/14 22:00~"
 
 d_pkg <- string2path::string2fill(pkg_name, "Noto Sans JP", font_weight = "black", tolerance = 0.01) |>
   dplyr::mutate(
