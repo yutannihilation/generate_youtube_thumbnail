@@ -1,25 +1,25 @@
 library(ggplot2)
 
 scale <- colorspace::scale_fill_continuous_sequential(
-  h1 = -139, h2 = 95, c1 = 68, c2 = 5, cmax = 104, l1 = 15, l2 = 97, p1 = 1.0, p2 = 1.3,
-  guide = "none", rev = FALSE
+  h1 = -154, h2 = 75, c1 = 12, c2 = 73, cmax = NA, l1 = 16, l2 = 96, p1 = 1.1, p2 = NA,
+  guide = "none", rev = TRUE
 )
 
 shadow_colour <- colorspace::darken(alpha("#4211dd", 0.2), 0.4)
 
 theta1 <- pi * 15.1 / 360
-theta2 <- pi * 19.0 / 360
+theta2 <- pi * 9.0 / 360
 
 set.seed(15)
 
-pkg_name <- "Vapour"
-pkg_ver <- ""
-start_time <- "2024/09/24 22:00~"
+pkg_name <- "duckplyr"
+pkg_ver <- "0.4.1"
+start_time <- "2024/10/01 22:00~"
 
 d_pkg <- string2path::string2fill(pkg_name, "Noto Sans JP", font_weight = "black", tolerance = 0.01) |>
   dplyr::mutate(
-    x = x * 1.02 + 0.15,
-    y = y * 1.02 - 0.10,
+    x = x * 0.94 + 0.05,
+    y = y * 0.94 + 0.08,
     data.frame(
       # 回転
       x = x * cos(theta1) - y * sin(theta1),
@@ -36,7 +36,7 @@ d_pkg <- string2path::string2fill(pkg_name, "Noto Sans JP", font_weight = "black
 d_ver <- string2path::string2fill(pkg_ver, "Noto Sans JP", font_weight = "black", tolerance = 0.01) |>
   dplyr::mutate(
     x = x * 0.72 + 0.93,
-    y = y * 0.72 - 0.50,
+    y = y * 0.72 - 0.40,
     data.frame(
       # 回転
       x = x * cos(theta2) - y * sin(theta2),
