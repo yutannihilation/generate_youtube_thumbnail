@@ -1,7 +1,7 @@
 library(ggplot2)
 
 scale <- colorspace::scale_fill_continuous_sequential(
-  h1 = 40, h2 = -127, c1 = 96, c2 = 23, cmax = 150, l1 = 23, l2 = 97, p1 = 1.1, p2 = 1.5,
+  h1 = -139, h2 = 95, c1 = 68, c2 = 5, cmax = 104, l1 = 15, l2 = 97, p1 = 1.0, p2 = 1.3,
   guide = "none", rev = FALSE
 )
 
@@ -12,19 +12,19 @@ theta2 <- pi * 19.0 / 360
 
 set.seed(15)
 
-pkg_name <- "patchwork"
-pkg_ver <- "1.3.0"
-start_time <- "2024/09/17 22:00~"
+pkg_name <- "Vapour"
+pkg_ver <- ""
+start_time <- "2024/09/24 22:00~"
 
 d_pkg <- string2path::string2fill(pkg_name, "Noto Sans JP", font_weight = "black", tolerance = 0.01) |>
   dplyr::mutate(
-    tibble::tibble(
-      x = x * 0.82 + 0.05,
-      y = y * 0.82 + 0.05
+    x = x * 1.02 + 0.15,
+    y = y * 1.02 - 0.10,
+    data.frame(
+      # 回転
+      x = x * cos(theta1) - y * sin(theta1),
+      y = x * sin(theta1) + y * cos(theta1)
     ),
-    # 回転
-    x = x * cos(theta1) - y * sin(theta1),
-    y = x * sin(theta1) + y * cos(theta1),
     fill = abs((60 * (x + 1))^1.2 + 30 * y + sqrt(triangle_id) + 50 * rnorm(dplyr::n()))^1.5
   ) |>
   dplyr::group_by(triangle_id) |>
@@ -37,9 +37,11 @@ d_ver <- string2path::string2fill(pkg_ver, "Noto Sans JP", font_weight = "black"
   dplyr::mutate(
     x = x * 0.72 + 0.93,
     y = y * 0.72 - 0.50,
-    # 回転
-    x = x * cos(theta2) - y * sin(theta2),
-    y = x * sin(theta2) + y * cos(theta2),
+    data.frame(
+      # 回転
+      x = x * cos(theta2) - y * sin(theta2),
+      y = x * sin(theta2) + y * cos(theta2)
+    ),
     fill = abs(70 + (60 * (x + 1))^1.2 + 30 * y + sqrt(triangle_id) + 50 * rnorm(dplyr::n()))^1.5
   ) |>
   dplyr::group_by(triangle_id) |>
