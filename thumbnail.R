@@ -1,8 +1,8 @@
 library(ggplot2)
 
 scale <- colorspace::scale_fill_continuous_sequential(
-  h1 = -154, h2 = 75, c1 = 12, c2 = 73, cmax = NA, l1 = 16, l2 = 96, p1 = 1.1, p2 = NA,
-  guide = "none", rev = TRUE
+  h1 = 195, h2 = 225, c1 = 50, c2 = 99, cmax = NA, l1 = 20, l2 = 105, p1 = 3.0, p2 = NA,
+  guide = "none", rev = FALSE
 )
 
 shadow_colour <- colorspace::darken(alpha("#4211dd", 0.2), 0.4)
@@ -12,14 +12,14 @@ theta2 <- pi * 9.0 / 360
 
 set.seed(15)
 
-pkg_name <- "duckplyr"
-pkg_ver <- "0.4.1"
-start_time <- "2024/10/01 22:00~"
+pkg_name <- "R"
+pkg_ver <- "4.4.2"
+start_time <- "2024/10/15 22:00~"
 
 d_pkg <- string2path::string2fill(pkg_name, "Noto Sans JP", font_weight = "black", tolerance = 0.01) |>
   dplyr::mutate(
-    x = x * 0.94 + 0.05,
-    y = y * 0.94 + 0.08,
+    x = x * 1.34 + 0.45,
+    y = y * 1.34 + 0.08,
     data.frame(
       # 回転
       x = x * cos(theta1) - y * sin(theta1),
@@ -35,8 +35,8 @@ d_pkg <- string2path::string2fill(pkg_name, "Noto Sans JP", font_weight = "black
 
 d_ver <- string2path::string2fill(pkg_ver, "Noto Sans JP", font_weight = "black", tolerance = 0.01) |>
   dplyr::mutate(
-    x = x * 0.72 + 0.93,
-    y = y * 0.72 - 0.40,
+    x = x * 0.76 + 0.93,
+    y = y * 0.76 - 0.30,
     data.frame(
       # 回転
       x = x * cos(theta2) - y * sin(theta2),
