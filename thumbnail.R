@@ -1,7 +1,7 @@
 library(ggplot2)
 
 scale <- colorspace::scale_fill_continuous_sequential(
-  h1 = 71, h2 = 135, c1 = 10, c2 = 103, cmax = NA, l1 = 10, l2 = 82, p1 = 2.0, p2 = NA,
+  h1 = -80, h2 = 78, c1 = 80, c2 = 55, cmax = 75, l1 = 30, l2 = 91, p1 = 0.8, p2 = 1.0,
   guide = "none", rev = TRUE
 )
 
@@ -12,9 +12,9 @@ theta2 <- pi * 9.0 / 360
 
 set.seed(15)
 
-pkg_name <- "tidyplots"
-pkg_ver <- "v0.1.2"
-start_time <- "2024/11/19 22:00~"
+pkg_name <- "shinylive"
+pkg_ver <- "v0.8.0"
+start_time <- "2024/11/26 22:00~"
 
 d_pkg <- string2path::string2fill(pkg_name, "Noto Sans JP", font_weight = "black", tolerance = 0.01) |>
   dplyr::mutate(
