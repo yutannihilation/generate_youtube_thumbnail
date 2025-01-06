@@ -1,8 +1,8 @@
 library(ggplot2)
 
 scale <- colorspace::scale_fill_continuous_sequential(
-  h1 = -80, h2 = 78, c1 = 80, c2 = 55, cmax = 75, l1 = 30, l2 = 91, p1 = 0.8, p2 = 1.0,
-  guide = "none", rev = TRUE
+  h1 = 262, h2 = 80, c1 = 87, c2 = 23, cmax = 180, l1 = 34, l2 = 100, p1 = 2.3, p2 = 1.3,
+  guide = "none", rev = FALSE
 )
 
 shadow_colour <- colorspace::darken(alpha("#4211dd", 0.2), 0.4)
@@ -12,14 +12,16 @@ theta2 <- pi * 9.0 / 360
 
 set.seed(15)
 
-pkg_name <- "shinylive"
-pkg_ver <- "v0.8.0"
-start_time <- "2024/11/26 22:00~"
+pkg_name <- "RStudio"
+pkg_ver <- "2024.12.0"
+start_time <- "2025/01/07 22:00~"
 
-d_pkg <- string2path::string2fill(pkg_name, "Noto Sans JP", font_weight = "black", tolerance = 0.01) |>
+font_family <- "Noto Sans JP"
+
+d_pkg <- string2path::string2fill(pkg_name, font_family, font_weight = "black", tolerance = 0.01) |>
   dplyr::mutate(
-    x = x * 0.94 + 0.11,
-    y = y * 0.94 + 0.08,
+    x = x * 0.93 + 0.11,
+    y = y * 0.93 + 0.08,
     data.frame(
       # 回転
       x = x * cos(theta1) - y * sin(theta1),
@@ -33,10 +35,10 @@ d_pkg <- string2path::string2fill(pkg_name, "Noto Sans JP", font_weight = "black
   ) |>
   dplyr::ungroup()
 
-d_ver <- string2path::string2fill(pkg_ver, "Noto Sans JP", font_weight = "black", tolerance = 0.01) |>
+d_ver <- string2path::string2fill(pkg_ver, font_family, font_weight = "black", tolerance = 0.01) |>
   dplyr::mutate(
-    x = x * 0.71 + 0.93,
-    y = y * 0.71 - 0.44,
+    x = x * 0.61 + 0.43,
+    y = y * 0.61 - 0.34,
     data.frame(
       # 回転
       x = x * cos(theta2) - y * sin(theta2),
@@ -55,7 +57,8 @@ d <- data.frame(
   x = rnorm(n, 1.7, 1.0),
   y = rnorm(n, 0.1, 1.0),
   text = sample(
-    c("<-", "plot()", "runif()", "if (", "} else {",
+    c(
+      "<-", "plot()", "runif()", "if (", "} else {",
       "df", "stop()", "is.na()", "is.null()",
       "<-", "=", "^", "@", "$", "[[", "]]", "==", "!=",
       "<-", "=", "^", "@", "$", "[[", "]]", "==", "!=",
@@ -65,7 +68,8 @@ d <- data.frame(
       "*", "&&", "||", "[", "]", "|>",
       "*", "&&", "||", "[", "]", "|>",
       "%||%", "TRUE", "FALSE", "na.rm",
-      "%in%", "mean()", "sd()", "?", "1:10", "tidyverse"),
+      "%in%", "mean()", "sd()", "?", "1:10", "tidyverse"
+    ),
     size = n,
     replace = TRUE
   ),
@@ -73,9 +77,11 @@ d <- data.frame(
 )
 
 p <- ggplot(mapping = aes(x, y, group = triangle_id)) +
-  geom_text(data = d, aes(label = text, angle = angle, group = NULL),
-            size = 6 * 4, colour = alpha("white", 0.4), family = "Iosevka") +
-  geom_polygon(data = d_pkg, aes(x + 0.05,  y - 0.03), fill = shadow_colour, colour = "transparent") +
+  geom_text(
+    data = d, aes(label = text, angle = angle, group = NULL),
+    size = 6 * 4, colour = alpha("white", 0.4), family = "Iosevka"
+  ) +
+  geom_polygon(data = d_pkg, aes(x + 0.05, y - 0.03), fill = shadow_colour, colour = "transparent") +
   geom_polygon(data = d_ver, aes(x + 0.045, y - 0.02), fill = shadow_colour, colour = "transparent") +
   geom_polygon(data = d_pkg, aes(fill = fill), colour = "transparent") +
   geom_polygon(data = d_ver, aes(fill = fill), colour = "transparent") +
@@ -88,30 +94,36 @@ p <- ggplot(mapping = aes(x, y, group = triangle_id)) +
   theme(plot.background = element_rect(fill = "#DDDDDD"))
 
 p1 <- p +
-  annotate("text", x = 0.05, y = -0.55, label = start_time, hjust = 0,
-           family = "Iosevka SS08", fontface = "bold", size = 6.7 * 4, colour = alpha("black", 0.67)) +
+  annotate("text",
+    x = 0.05, y = -0.55, label = start_time, hjust = 0,
+    family = "Iosevka", fontface = "bold", size = 6.7 * 4, colour = alpha("black", 0.67)
+  ) +
   coord_equal(
-    xlim = c(0,  3),
+    xlim = c(0, 3),
     ylim = c(-1.3, 1.7) * 9 / 16
   )
 
 ggsave("icon.png", p1, width = 1280, height = 720, units = "px", scale = 4)
 
 p2 <- p +
-  annotate("text", x = 0.05, y = -0.55, label = "もうすぐはじまるよ～", hjust = 0,
-           family = "Noto Sans JP", fontface = "bold", size = 6.7 * 4, colour = alpha("black", 0.67)) +
+  annotate("text",
+    x = 0.05, y = -0.55, label = "もうすぐはじまるよ～", hjust = 0,
+    family = font_family, fontface = "bold", size = 6.7 * 4, colour = alpha("black", 0.67)
+  ) +
   coord_equal(
-    xlim = c(0,  3),
+    xlim = c(0, 3),
     ylim = c(-1.3, 1.7) * 9 / 16
   )
 
 ggsave("waiting.png", p2, width = 1280, height = 720, units = "px", scale = 4)
 
 p3 <- p +
-  annotate("text", x = 0.05, y = -0.55, label = "ありがとうございました！", hjust = 0,
-           family = "Noto Sans JP", fontface = "bold", size = 6.7 * 4, colour = alpha("black", 0.67)) +
+  annotate("text",
+    x = 0.05, y = -0.55, label = "ありがとうございました！", hjust = 0,
+    family = font_family, fontface = "bold", size = 6.7 * 4, colour = alpha("black", 0.67)
+  ) +
   coord_equal(
-    xlim = c(0,  3),
+    xlim = c(0, 3),
     ylim = c(-1.3, 1.7) * 9 / 16
   )
 
