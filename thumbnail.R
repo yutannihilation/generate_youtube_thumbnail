@@ -1,8 +1,8 @@
 library(ggplot2)
 
 scale <- colorspace::scale_fill_continuous_sequential(
-  h1 = 262, h2 = 80, c1 = 87, c2 = 23, cmax = 180, l1 = 34, l2 = 100, p1 = 2.3, p2 = 1.3,
-  guide = "none", rev = FALSE
+  h1 = 270, h2 = 186, c1 = 55, c2 = 20, cmax = 60, l1 = 31, l2 = 92, p1 = 2.2, p2 = 0.7,
+  guide = "none", rev = TRUE
 )
 
 shadow_colour <- colorspace::darken(alpha("#4211dd", 0.2), 0.4)
@@ -12,16 +12,16 @@ theta2 <- pi * 9.0 / 360
 
 set.seed(15)
 
-pkg_name <- "RStudio"
-pkg_ver <- "2024.12.0"
-start_time <- "2025/01/07 22:00~"
+pkg_name <- "air"
+pkg_ver <- "v1.0.0"
+start_time <- "2025/01/21 22:00~"
 
 font_family <- "Noto Sans JP"
 
 d_pkg <- string2path::string2fill(pkg_name, font_family, font_weight = "black", tolerance = 0.01) |>
   dplyr::mutate(
-    x = x * 0.93 + 0.11,
-    y = y * 0.93 + 0.08,
+    x = x * 1.31 + 0.31,
+    y = y * 1.31 + 0.08,
     data.frame(
       # 回転
       x = x * cos(theta1) - y * sin(theta1),
@@ -37,7 +37,7 @@ d_pkg <- string2path::string2fill(pkg_name, font_family, font_weight = "black", 
 
 d_ver <- string2path::string2fill(pkg_ver, font_family, font_weight = "black", tolerance = 0.01) |>
   dplyr::mutate(
-    x = x * 0.61 + 0.43,
+    x = x * 0.61 + 0.83,
     y = y * 0.61 - 0.34,
     data.frame(
       # 回転
