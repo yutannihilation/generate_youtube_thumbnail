@@ -1,9 +1,11 @@
 library(ggplot2)
 
-scale <- colorspace::scale_fill_continuous_sequential(
-  h1 = 270, h2 = 186, c1 = 55, c2 = 20, cmax = 60, l1 = 31, l2 = 92, p1 = 2.2, p2 = 0.7,
-  guide = "none", rev = TRUE
-)
+# scale <- colorspace::scale_fill_continuous_sequential(
+#   h1 = 270, h2 = 186, c1 = 55, c2 = 20, cmax = 60, l1 = 31, l2 = 92, p1 = 2.2, p2 = 0.7,
+#   guide = "none", rev = TRUE
+# )
+
+scale <- scale_fill_viridis_c(option = "A", guide = "none")
 
 shadow_colour <- colorspace::darken(alpha("#4211dd", 0.2), 0.4)
 
@@ -12,16 +14,16 @@ theta2 <- pi * 9.0 / 360
 
 set.seed(15)
 
-pkg_name <- "air"
-pkg_ver <- "v1.0.0"
-start_time <- "2025/01/21 22:00~"
+pkg_name <- "httr2"
+pkg_ver <- "v1.1.0"
+start_time <- "2025/01/28 22:00~"
 
 font_family <- "Noto Sans JP"
 
 d_pkg <- string2path::string2fill(pkg_name, font_family, font_weight = "black", tolerance = 0.01) |>
   dplyr::mutate(
-    x = x * 1.31 + 0.31,
-    y = y * 1.31 + 0.08,
+    x = x * 1.21 + 0.31,
+    y = y * 1.21 - 0.02,
     data.frame(
       # 回転
       x = x * cos(theta1) - y * sin(theta1),
@@ -37,8 +39,8 @@ d_pkg <- string2path::string2fill(pkg_name, font_family, font_weight = "black", 
 
 d_ver <- string2path::string2fill(pkg_ver, font_family, font_weight = "black", tolerance = 0.01) |>
   dplyr::mutate(
-    x = x * 0.61 + 0.83,
-    y = y * 0.61 - 0.34,
+    x = x * 0.61 + 1.23,
+    y = y * 0.61 - 0.38,
     data.frame(
       # 回転
       x = x * cos(theta2) - y * sin(theta2),
