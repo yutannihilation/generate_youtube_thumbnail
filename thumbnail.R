@@ -5,7 +5,7 @@ library(ggplot2)
 #   guide = "none", rev = TRUE
 # )
 
-scale <- scale_fill_viridis_c(option = "A", guide = "none")
+scale <- scale_fill_viridis_c(option = "C", guide = "none")
 
 shadow_colour <- colorspace::darken(alpha("#4211dd", 0.2), 0.4)
 
@@ -14,9 +14,9 @@ theta2 <- pi * 9.0 / 360
 
 set.seed(15)
 
-pkg_name <- "httr2"
-pkg_ver <- "v1.1.0"
-start_time <- "2025/01/28 22:00~"
+pkg_name <- "mirai"
+pkg_ver <- "v2.0"
+start_time <- "2025/02/04 22:00~"
 
 font_family <- "Noto Sans JP"
 
