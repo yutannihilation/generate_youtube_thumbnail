@@ -14,16 +14,16 @@ theta2 <- pi * 9.0 / 360
 
 set.seed(15)
 
-pkg_name <- "mirai"
-pkg_ver <- "v2.0"
-start_time <- "2025/02/04 22:00~"
+pkg_name <- "nanoparquet"
+pkg_ver <- "v0.4.0"
+start_time <- "2025/02/11 22:00~"
 
 font_family <- "Noto Sans JP"
 
 d_pkg <- string2path::string2fill(pkg_name, font_family, font_weight = "black", tolerance = 0.01) |>
   dplyr::mutate(
-    x = x * 1.21 + 0.31,
-    y = y * 1.21 - 0.02,
+    x = x * 0.71 - 0.10,
+    y = y * 0.71 + 0.08,
     data.frame(
       # 回転
       x = x * cos(theta1) - y * sin(theta1),
