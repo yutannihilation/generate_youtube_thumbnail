@@ -5,7 +5,7 @@ library(ggplot2)
 #   guide = "none", rev = TRUE
 # )
 
-scale <- scale_fill_viridis_c(option = "C", guide = "none")
+scale <- scale_fill_viridis_c(option = "D", guide = "none")
 
 shadow_colour <- colorspace::darken(alpha("#4211dd", 0.2), 0.4)
 
@@ -14,16 +14,16 @@ theta2 <- pi * 9.0 / 360
 
 set.seed(15)
 
-pkg_name <- "nanoparquet"
-pkg_ver <- "v0.4.0"
-start_time <- "2025/02/11 22:00~"
+pkg_name <- "duckplyr"
+pkg_ver <- "v1.0.0"
+start_time <- "2025/02/18 22:00~"
 
 font_family <- "Noto Sans JP"
 
 d_pkg <- string2path::string2fill(pkg_name, font_family, font_weight = "black", tolerance = 0.01) |>
   dplyr::mutate(
-    x = x * 0.71 - 0.10,
-    y = y * 0.71 + 0.08,
+    x = x * 1.00 + 0.00,
+    y = y * 1.00 + 0.08,
     data.frame(
       # 回転
       x = x * cos(theta1) - y * sin(theta1),
