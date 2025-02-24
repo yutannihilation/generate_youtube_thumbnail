@@ -14,22 +14,29 @@ theta2 <- pi * 9.0 / 360
 
 set.seed(15)
 
-pkg_name <- "duckplyr"
-pkg_ver <- "v1.0.0"
-start_time <- "2025/02/18 22:00~"
+pkg_name <- "Positron"
+pkg_ver <- ""
+start_time <- "2025/02/25 22:00~"
 
 font_family <- "Noto Sans JP"
 
-d_pkg <- string2path::string2fill(pkg_name, font_family, font_weight = "black", tolerance = 0.01) |>
+d_pkg <- string2path::string2fill(
+  pkg_name,
+  font_family,
+  font_weight = "black",
+  tolerance = 0.01
+) |>
   dplyr::mutate(
     x = x * 1.00 + 0.00,
-    y = y * 1.00 + 0.08,
+    y = y * 1.00 - 0.18,
     data.frame(
       # 回転
       x = x * cos(theta1) - y * sin(theta1),
       y = x * sin(theta1) + y * cos(theta1)
     ),
-    fill = abs((60 * (x + 1))^1.2 + 30 * y + sqrt(triangle_id) + 50 * rnorm(dplyr::n()))^1.5
+    fill = abs(
+      (60 * (x + 1))^1.2 + 30 * y + sqrt(triangle_id) + 50 * rnorm(dplyr::n())
+    )^1.5
   ) |>
   dplyr::group_by(triangle_id) |>
   dplyr::mutate(
@@ -37,7 +44,12 @@ d_pkg <- string2path::string2fill(pkg_name, font_family, font_weight = "black", 
   ) |>
   dplyr::ungroup()
 
-d_ver <- string2path::string2fill(pkg_ver, font_family, font_weight = "black", tolerance = 0.01) |>
+d_ver <- string2path::string2fill(
+  pkg_ver,
+  font_family,
+  font_weight = "black",
+  tolerance = 0.01
+) |>
   dplyr::mutate(
     x = x * 0.61 + 1.23,
     y = y * 0.61 - 0.38,
@@ -46,7 +58,13 @@ d_ver <- string2path::string2fill(pkg_ver, font_family, font_weight = "black", t
       x = x * cos(theta2) - y * sin(theta2),
       y = x * sin(theta2) + y * cos(theta2)
     ),
-    fill = abs(70 + (60 * (x + 1))^1.2 + 30 * y + sqrt(triangle_id) + 50 * rnorm(dplyr::n()))^1.5
+    fill = abs(
+      70 +
+        (60 * (x + 1))^1.2 +
+        30 * y +
+        sqrt(triangle_id) +
+        50 * rnorm(dplyr::n())
+    )^1.5
   ) |>
   dplyr::group_by(triangle_id) |>
   dplyr::mutate(
@@ -60,17 +78,76 @@ d <- data.frame(
   y = rnorm(n, 0.1, 1.0),
   text = sample(
     c(
-      "<-", "plot()", "runif()", "if (", "} else {",
-      "df", "stop()", "is.na()", "is.null()",
-      "<-", "=", "^", "@", "$", "[[", "]]", "==", "!=",
-      "<-", "=", "^", "@", "$", "[[", "]]", "==", "!=",
-      "<-", "=", "^", "@", "$", "[[", "]]", "==", "!=",
-      "data.frame()", "+", "*", "%*%", "\\(x)", "q()",
-      "*", "&&", "||", "[", "]", "|>",
-      "*", "&&", "||", "[", "]", "|>",
-      "*", "&&", "||", "[", "]", "|>",
-      "%||%", "TRUE", "FALSE", "na.rm",
-      "%in%", "mean()", "sd()", "?", "1:10", "tidyverse"
+      "<-",
+      "plot()",
+      "runif()",
+      "if (",
+      "} else {",
+      "df",
+      "stop()",
+      "is.na()",
+      "is.null()",
+      "<-",
+      "=",
+      "^",
+      "@",
+      "$",
+      "[[",
+      "]]",
+      "==",
+      "!=",
+      "<-",
+      "=",
+      "^",
+      "@",
+      "$",
+      "[[",
+      "]]",
+      "==",
+      "!=",
+      "<-",
+      "=",
+      "^",
+      "@",
+      "$",
+      "[[",
+      "]]",
+      "==",
+      "!=",
+      "data.frame()",
+      "+",
+      "*",
+      "%*%",
+      "\\(x)",
+      "q()",
+      "*",
+      "&&",
+      "||",
+      "[",
+      "]",
+      "|>",
+      "*",
+      "&&",
+      "||",
+      "[",
+      "]",
+      "|>",
+      "*",
+      "&&",
+      "||",
+      "[",
+      "]",
+      "|>",
+      "%||%",
+      "TRUE",
+      "FALSE",
+      "na.rm",
+      "%in%",
+      "mean()",
+      "sd()",
+      "?",
+      "1:10",
+      "tidyverse"
     ),
     size = n,
     replace = TRUE
@@ -80,11 +157,24 @@ d <- data.frame(
 
 p <- ggplot(mapping = aes(x, y, group = triangle_id)) +
   geom_text(
-    data = d, aes(label = text, angle = angle, group = NULL),
-    size = 6 * 4, colour = alpha("white", 0.4), family = "Iosevka"
+    data = d,
+    aes(label = text, angle = angle, group = NULL),
+    size = 6 * 4,
+    colour = alpha("white", 0.4),
+    family = "Iosevka"
   ) +
-  geom_polygon(data = d_pkg, aes(x + 0.05, y - 0.03), fill = shadow_colour, colour = "transparent") +
-  geom_polygon(data = d_ver, aes(x + 0.045, y - 0.02), fill = shadow_colour, colour = "transparent") +
+  geom_polygon(
+    data = d_pkg,
+    aes(x + 0.05, y - 0.03),
+    fill = shadow_colour,
+    colour = "transparent"
+  ) +
+  geom_polygon(
+    data = d_ver,
+    aes(x + 0.045, y - 0.02),
+    fill = shadow_colour,
+    colour = "transparent"
+  ) +
   geom_polygon(data = d_pkg, aes(fill = fill), colour = "transparent") +
   geom_polygon(data = d_ver, aes(fill = fill), colour = "transparent") +
   geom_path(data = d_pkg, colour = alpha("white", 0.3), linewidth = 0.75) +
@@ -96,9 +186,16 @@ p <- ggplot(mapping = aes(x, y, group = triangle_id)) +
   theme(plot.background = element_rect(fill = "#DDDDDD"))
 
 p1 <- p +
-  annotate("text",
-    x = 0.05, y = -0.55, label = start_time, hjust = 0,
-    family = "Iosevka", fontface = "bold", size = 6.7 * 4, colour = alpha("black", 0.67)
+  annotate(
+    "text",
+    x = 0.05,
+    y = -0.55,
+    label = start_time,
+    hjust = 0,
+    family = "Iosevka",
+    fontface = "bold",
+    size = 6.7 * 4,
+    colour = alpha("black", 0.67)
   ) +
   coord_equal(
     xlim = c(0, 3),
@@ -108,9 +205,16 @@ p1 <- p +
 ggsave("icon.png", p1, width = 1280, height = 720, units = "px", scale = 4)
 
 p2 <- p +
-  annotate("text",
-    x = 0.05, y = -0.55, label = "もうすぐはじまるよ～", hjust = 0,
-    family = font_family, fontface = "bold", size = 6.7 * 4, colour = alpha("black", 0.67)
+  annotate(
+    "text",
+    x = 0.05,
+    y = -0.55,
+    label = "もうすぐはじまるよ～",
+    hjust = 0,
+    family = font_family,
+    fontface = "bold",
+    size = 6.7 * 4,
+    colour = alpha("black", 0.67)
   ) +
   coord_equal(
     xlim = c(0, 3),
@@ -120,9 +224,16 @@ p2 <- p +
 ggsave("waiting.png", p2, width = 1280, height = 720, units = "px", scale = 4)
 
 p3 <- p +
-  annotate("text",
-    x = 0.05, y = -0.55, label = "ありがとうございました！", hjust = 0,
-    family = font_family, fontface = "bold", size = 6.7 * 4, colour = alpha("black", 0.67)
+  annotate(
+    "text",
+    x = 0.05,
+    y = -0.55,
+    label = "ありがとうございました！",
+    hjust = 0,
+    family = font_family,
+    fontface = "bold",
+    size = 6.7 * 4,
+    colour = alpha("black", 0.67)
   ) +
   coord_equal(
     xlim = c(0, 3),
