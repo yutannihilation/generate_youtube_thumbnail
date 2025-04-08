@@ -5,7 +5,7 @@ library(ggplot2)
 #   guide = "none", rev = TRUE
 # )
 
-scale <- scale_fill_viridis_c(option = "D", guide = "none", direction = -1)
+scale <- scale_fill_viridis_c(option = "E", guide = "none", direction = -1)
 
 shadow_colour <- colorspace::darken(alpha("#4211dd", 0.2), 0.4)
 
@@ -14,9 +14,9 @@ theta2 <- pi * 9.0 / 360
 
 set.seed(15)
 
-pkg_name <- "R"
-pkg_ver <- "v4.5.0"
-start_time <- "2025/03/18 22:00~"
+pkg_name <- "plumber2"
+pkg_ver <- "v0.0.0.9000"
+start_time <- "2025/04/08 22:00~"
 
 font_family <- "Noto Sans JP"
 
@@ -27,8 +27,8 @@ d_pkg <- string2path::string2fill(
   tolerance = 0.01
 ) |>
   dplyr::mutate(
-    x = x * 1.60 + 0.48,
-    y = y * 1.60 + 0.00,
+    x = x * 0.95 - 0.10,
+    y = y * 0.95 - 0.08,
     data.frame(
       # 回転
       x = x * cos(theta1) - y * sin(theta1),
@@ -51,8 +51,8 @@ d_ver <- string2path::string2fill(
   tolerance = 0.01
 ) |>
   dplyr::mutate(
-    x = x * 0.71 + 1.00,
-    y = y * 0.71 - 0.42,
+    x = x * 0.35 + 1.10,
+    y = y * 0.35 - 0.42,
     data.frame(
       # 回転
       x = x * cos(theta2) - y * sin(theta2),
